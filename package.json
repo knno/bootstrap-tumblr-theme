@@ -1,0 +1,18 @@
+{
+  "name": "bootstrap-tumblr-theme",
+  "version": "1.0.0",
+  "description": "Bootstrap 4 Tumblr Theme",
+  "main": "index.js",
+  "repository": "github.com/knno/bootstrap-tumblr-theme",
+  "author": "Kenan Masri <knno@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn sass -I node_modules src/theme.scss dist/theme.min.css && yarn sass -I node_modules src/theme-dark.scss dist/theme-dark.min.css"
+  },
+  "private": false,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "bootstrap": "^4.4.1",
+    "sass": "^1.26.5"
+  }
+}

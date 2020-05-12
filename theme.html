@@ -14,13 +14,15 @@
 		<meta name="if:Carousel photoset" content="0">
         <meta name="if:Theme switcher enabled" content="1">
 				
-		<meta name="text:CSS Light URL" content="https://gitcdn.link/repo/knno/bootstrap-tumblr-theme/master/dist/theme.min.css"/>
-		<meta name="text:CSS Night URL" content="https://gitcdn.link/repo/knno/bootstrap-tumblr-theme/master/dist/theme-dark.min.css"/>
-		<link href="{text:CSS Light URL}" rel="stylesheet" data-night="false">
+		<meta name="text:CSS Light URL" content="https://knno.github.io/bootstrap-tumblr-theme/dist/theme.min.css"/>
+		<meta name="text:CSS Night URL" content="https://knno.github.io/bootstrap-tumblr-theme/dist/theme-dark.min.css"/>
+		<link href="{text:CSS Night URL}" rel="stylesheet" id="night-css" data-theme="on">
+		<link href="{text:CSS Light URL}" rel="stylesheet" id="light-css" data-theme="on">
 
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 		<style type="text/css">
+* {transition: background-color .15s ease, color .15s ease;}
 body {
 	padding-top: 70px;
 }
@@ -558,11 +560,23 @@ footer {
 		<script src="//netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" type="text/javascript"></script>
         {block:IfThemeSwitcherEnabled}
         <script>
+			var toggleTheme = function(themeName) {
+				var stylesheets = $("link[rel='stylesheet'][data-theme]");
+				var length = stylesheets.length;
+				var i;
+				for(i = 0; i < length; i++) {
+					var ss = stylesheets[i];
+					if (ss.href != null ) {
+						ss.disabled = (ss.id.indexOf(themeName) !== -1) ? false : true;
+					}
+				}
+			};
+
             $('#toggle-box-checkbox').on('change', function(){
                 if(this.checked){
-                    $('[data-night]').attr("href", "{text:CSS Night URL}");
+					toggleTheme('night')
                 }else{
-                    $('[data-night]').attr("href", "{text:CSS Light URL}");
+					toggleTheme('light');
                 }
             });
         </script>
